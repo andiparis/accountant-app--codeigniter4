@@ -32,6 +32,7 @@ $RECYCLE.BIN/
 
 # KDE directory preferences
 .directory
+public/template
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
