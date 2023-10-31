@@ -2,7 +2,7 @@
 <li class="dropdown">
   <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Kode Akun</span></a>
   <ul class="dropdown-menu">
-    <li><a class="nav-link" href="#">Akun - 1</a></li>
+    <li><a class="nav-link" href="<?= site_url('akun1') ?>">Akun - 1</a></li>
     <li><a class="nav-link" href="#">Akun - 2</a></li>
   </ul>
 </li>
