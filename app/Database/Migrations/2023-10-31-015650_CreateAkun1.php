@@ -16,12 +16,12 @@ class CreateAkun1 extends Migration
         'auto_increment'  => true,
       ],
       'kode_akun1'        => [
-        'type'            => 'VARCHAR',
+        'type'            => 'INT',
         'constraint'      => 6,
       ],
       'nama_akun1'        => [
         'type'            => 'VARCHAR',
-        'constraint'      => 20,
+        'constraint'      => 50,
       ],
     ]);
     $this->forge->addKey('id_akun1', true);
