@@ -1,5 +1,9 @@
 <?= $this->extend('layout/backend') ?>
 
+<?= $this->section('title') ?>
+<title>SIA &mdash; Add Akun 1</title>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <section class="section">
@@ -17,11 +21,11 @@
           <?= csrf_field() ?>
           <div class="form-group">
             <label for="kode_akun1">Kode Akun 1</label>
-            <input type="text" name="kode_akun1" id="kode_akun1" placeholder="Kode akun" class="form-control" required>
+            <input type="text" name="kode_akun1" id="kode_akun1" placeholder="Kode akun 1" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="nama_akun1">Nama Akun 1</label>
-            <input type="text" name="nama_akun1" id="nama_akun1" placeholder="Nama akun" class="form-control" required>
+            <input type="text" name="nama_akun1" id="nama_akun1" placeholder="Nama akun 1" class="form-control" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Save</button>

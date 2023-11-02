@@ -40,7 +40,7 @@
               <tr>
                 <th style="width: 5%">No</th>
                 <th>Kode Akun 1</th>
-                <th>Nama Akun</th>
+                <th>Nama Akun 1</th>
                 <th style="width: 15%">Action</th>
               </tr>
             </thead>
