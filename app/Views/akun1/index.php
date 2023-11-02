@@ -1,5 +1,9 @@
 <?= $this->extend('layout/backend') ?>
 
+<?= $this->section('title') ?>
+<title>SIA &mdash; Akun 1</title>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <section class="section">
@@ -31,7 +35,7 @@
       </div>
       <div class="card-body p-4">
         <div class="table-responsive">
-          <table class="table table-striped table-md">
+          <table id="myTable" class="table table-striped table-md">
             <thead>
               <tr>
                 <th style="width: 5%">No</th>
@@ -50,7 +54,11 @@
                   <td><?= $akun1->nama_akun1 ?></td>
                   <td class="text-center">
                     <a href="<?= site_url('akun1/edit/' . $akun1->id_akun1) ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                    <form action="<?= site_url('akun1/' . $akun1->id_akun1) ?>" method="post" id="delete-<?= $akun1->id_akun1 ?>" class="d-inline">
+                      <?= csrf_field() ?>
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun 1 ini?" data-confirm-yes="deleteData(<?= $akun1->id_akun1 ?>)"><i class="fas fa-trash"></i> Delete</button>
+                    </form>
                   </td>
                 </tr>
               <?php } ?>
