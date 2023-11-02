@@ -49,7 +49,7 @@
                   <td><?= $akun1->kode_akun1 ?></td>
                   <td><?= $akun1->nama_akun1 ?></td>
                   <td class="text-center">
-                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                    <a href="<?= site_url('akun1/edit/' . $akun1->id_akun1) ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                     <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                   </td>
                 </tr>
