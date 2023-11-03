@@ -21,3 +21,8 @@ $routes->delete('/akun1/(:any)', 'Akun1::destroy/$1');
 // $routes->get('/akun2/(:segment)/edit', 'Akun2::edit/$1');
 $routes->post('/akun2/(:any)', 'Akun2::delete/$1');
 $routes->resource('akun2');
+
+// Transaksi
+$routes->get('/transaksi/akun2', 'Transaksi::akun2');
+$routes->get('/transaksi/status', 'Transaksi::status');
+$routes->resource('transaksi');

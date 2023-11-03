@@ -12,9 +12,9 @@
 <li><a class="nav-link" href="#"><i class="fas fa-balance-scale"></i> <span>Neraca Saldo</span></a></li>
 <li><a class="nav-link" href="#"><i class="far fa-square"></i> <span>Neraca Lajur</span></a></li>
 <li class="dropdown">
-  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Transaksi</span></a>
   <ul class="dropdown-menu">
-    <li><a class="nav-link" href="#">Transaksi Jurnal</a></li>
+    <li><a class="nav-link" href="<?= site_url('transaksi') ?>">Transaksi Jurnal</a></li>
     <li><a class="nav-link" href="#">Transaksi Penyesuaian</a></li>
   </ul>
 </li>
