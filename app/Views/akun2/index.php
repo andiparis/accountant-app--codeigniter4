@@ -72,4 +72,4 @@
   </div>
 </section>
 
-<?= $this->endSection() ?>s
+<?= $this->endSection() ?>
