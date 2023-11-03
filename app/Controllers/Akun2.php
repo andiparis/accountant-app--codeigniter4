@@ -84,8 +84,8 @@ class Akun2 extends ResourceController
       $data['akun1Data'] = $query->getResult();
       $data['akun2Data'] = $akun2;
       return view('akun2/edit', $data);
-      // } else {
-      //   throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    } else {
+      throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
   }
 
