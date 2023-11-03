@@ -8,7 +8,7 @@
 
 <section class="section">
   <div class="section-header">
-    <a href="<?= site_url('akun2/new') ?>" class="btn btn-primary">Add New</a>
+    <a href="<?= site_url('akun2/new') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
   </div>
 
   <?php if (session()->getFlashdata('success')) { ?>
@@ -39,9 +39,9 @@
             <thead>
               <tr>
                 <th style="width: 5%">No</th>
+                <th>Nama Akun 1</th>
                 <th>Kode Akun 2</th>
                 <th>Nama Akun 2</th>
-                <th>Nama Akun 1</th>
                 <th style="width: 15%">Action</th>
               </tr>
             </thead>
@@ -51,9 +51,9 @@
               ?>
                 <tr>
                   <td><?= $key + 1 ?></td>
+                  <td><?= $akun2->nama_akun1 ?></td>
                   <td><?= $akun2->kode_akun2 ?></td>
                   <td><?= $akun2->nama_akun2 ?></td>
-                  <td><?= $akun2->nama_akun1 ?></td>
                   <td class="text-center">
                     <a href="<?= site_url('akun2/' . $akun2->id_akun2 . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                     <form action="<?= site_url('akun2/' . $akun2->id_akun2) ?>" method="post" id="delete-<?= $akun2->id_akun2 ?>" class="d-inline">

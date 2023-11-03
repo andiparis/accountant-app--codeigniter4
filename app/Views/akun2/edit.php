@@ -8,7 +8,7 @@
 
 <section class="section">
   <div class="section-header">
-    <a href="<?= site_url('akun2') ?>" class="btn btn-primary">Back</a>
+    <a href="<?= site_url('akun2') ?>" class="btn btn-primary"><i class="fas fa-chevron-left"></i> Back</a>
   </div>
 
   <div class="section-body">
@@ -39,7 +39,7 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Update</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="reset" class="btn btn-secondary"><i class="fas fa-undo-alt"></i> Reset</button>
           </div>
         </form>
       </div>

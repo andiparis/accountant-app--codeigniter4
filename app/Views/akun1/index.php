@@ -8,7 +8,7 @@
 
 <section class="section">
   <div class="section-header">
-    <a href="<?= site_url('akun1/new') ?>" class="btn btn-primary">Add New</a>
+    <a href="<?= site_url('akun1/new') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
   </div>
 
   <?php if (session()->getFlashdata('success')) { ?>
