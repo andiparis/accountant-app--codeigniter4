@@ -20,10 +20,6 @@
         <form action="<?= site_url('transaksi') ?>" method="post">
           <?= csrf_field() ?>
           <div class="form-group">
-            <label for="kwitansi">Kwitansi</label>
-            <input type="text" name="kwitansi" id="kwitansi" placeholder="Kwitansi" class="form-control" required>
-          </div>
-          <div class="form-group">
             <label for="tanggal">Tanggal</label>
             <input type="date" name="tanggal" id="tanggal" placeholder="Tanggal" class="form-control" required>
           </div>

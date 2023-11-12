@@ -37,4 +37,18 @@ class ModelTransaksi extends Model
   // protected $afterFind      = [];
   // protected $beforeDelete   = [];
   // protected $afterDelete    = [];
+
+  public function generateKwitansiNumber()
+  {
+    $query = $this->db->table('transaksi')->select('RIGHT(transaksi.kwitansi, 4) as kwitansi', FALSE)
+      ->orderBy('kwitansi', 'DESC')->limit(1)->get()->getRowArray();
+
+    if ($query == NULL) {
+      $number = 1;
+    } else {
+      $number = intval($query['kwitansi']) + 1;
+    }
+    $kwitansiNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
+    return $kwitansiNumber;
+  }
 }

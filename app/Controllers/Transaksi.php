@@ -61,9 +61,8 @@ class Transaksi extends ResourceController
    */
   public function create()
   {
-    // $data = $this->request->getPost();
     $data1 = [
-      'kwitansi'    => $this->request->getVar('kwitansi'),
+      'kwitansi'    => $this->objTransaksi->generateKwitansiNumber(),
       'tanggal'     => $this->request->getVar('tanggal'),
       'deskripsi'   => $this->request->getVar('deskripsi'),
       'ketjurnal'   => $this->request->getVar('ketjurnal'),
