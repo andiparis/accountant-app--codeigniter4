@@ -16,10 +16,6 @@ $routes->put('/akun1/edit/(:any)', 'Akun1::update/$1');
 $routes->delete('/akun1/(:any)', 'Akun1::destroy/$1');
 
 // Akun 2
-// $routes->get('/akun2', 'Akun2::index');
-// $routes->get('/akun2/new', 'Akun2::new');
-// $routes->get('/akun2/(:segment)/edit', 'Akun2::edit/$1');
-$routes->post('/akun2/(:any)', 'Akun2::delete/$1');
 $routes->resource('akun2');
 
 // Transaksi
