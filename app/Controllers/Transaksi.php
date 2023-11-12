@@ -11,7 +11,9 @@ use CodeIgniter\RESTful\ResourceController;
 /**
  * @property db $db
  * @property objTransaksi $objTransaksi
+ * @property objAkun2 $objAkun2
  * @property objNilai $objNilai
+ * @property objStatus $objStatus
  */
 
 class Transaksi extends ResourceController
@@ -20,7 +22,9 @@ class Transaksi extends ResourceController
   {
     $this->db = \Config\Database::connect();
     $this->objTransaksi = new ModelTransaksi();
+    $this->objAkun2 = new ModelAkun2();
     $this->objNilai = new ModelNilai();
+    $this->objStatus = new ModelStatus();
   }
 
   /**
@@ -96,7 +100,21 @@ class Transaksi extends ResourceController
    */
   public function edit($id = null)
   {
-    //
+    $transaksi = $this->objTransaksi->find($id);
+    $akun2 = $this->objAkun2->findAll();
+    $nilai = $this->db->table('nilai')->where(['id_transaksi' => $id])->get()->getResult();
+    $status = $this->objStatus->findAll();
+
+    if (is_object($transaksi)) {
+      $data['transaksiData'] = $transaksi;
+      $data['akun2Data'] = $akun2;
+      $data['nilaiData'] = $nilai;
+      $data['statusData'] = $status;
+
+      return view('transaksi/edit', $data);
+    } else {
+      throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    }
   }
 
   /**
@@ -106,7 +124,31 @@ class Transaksi extends ResourceController
    */
   public function update($id = null)
   {
-    //
+    $data1 = [
+      'tanggal'     => $this->request->getVar('tanggal'),
+      'deskripsi'   => $this->request->getVar('deskripsi'),
+      'ketjurnal'   => $this->request->getVar('ketjurnal'),
+    ];
+    $this->db->table('transaksi')->where(['id_transaksi' => $id])->update($data1);
+
+    $id_nilai = $this->request->getVar('id_nilai');
+    $id_akun2 = $this->request->getVar('id_akun2');
+    $debit = $this->request->getVar('debit');
+    $kredit = $this->request->getVar('kredit');
+    $id_status = $this->request->getVar('id_status');
+
+    foreach ($id_nilai as $key => $value) {
+      $data2[] = [
+        'id_nilai'      => $id_nilai[$key],
+        'id_akun2'      => $id_akun2[$key],
+        'debit'         => $debit[$key],
+        'kredit'        => $kredit[$key],
+        'id_status'     => $id_status[$key],
+      ];
+    }
+    $this->objNilai->updateBatch($data2, 'id_nilai');
+
+    return redirect()->to(site_url('transaksi'))->with('success', 'Data berhasil di update');
   }
 
   /**
