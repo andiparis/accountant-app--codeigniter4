@@ -28,12 +28,12 @@
             <input type="date" name="tanggal" id="tanggal" placeholder="Tanggal" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="deskripsi">Deskripsi</label>
-            <input type="text" name="deskripsi" id="deskripsi" placeholder="Deskripsi" class="form-control" required>
-          </div>
-          <div class="form-group">
             <label for="ketjurnal">Keterangan Jurnal</label>
             <input type="text" name="ketjurnal" id="ketjurnal" placeholder="Keterangan Jurnal" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="deskripsi">Deskripsi</label>
+            <input type="text" name="deskripsi" id="deskripsi" placeholder="Deskripsi" class="form-control" required>
           </div>
 
           <div class="box-body">
