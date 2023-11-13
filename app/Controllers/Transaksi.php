@@ -45,7 +45,21 @@ class Transaksi extends ResourceController
    */
   public function show($id = null)
   {
-    //
+    $transaksi = $this->objTransaksi->find($id);
+    $akun2 = $this->objAkun2->findAll();
+    $nilai = $this->objNilai->getNilaiWithAllRelationUsingId($id);
+    $status = $this->objStatus->findAll();
+
+    if (is_object($transaksi)) {
+      $data['transaksiData'] = $transaksi;
+      $data['akun2Data'] = $akun2;
+      $data['nilaiData'] = $nilai;
+      $data['statusData'] = $status;
+
+      return view('transaksi/show', $data);
+    } else {
+      throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    }
   }
 
   /**

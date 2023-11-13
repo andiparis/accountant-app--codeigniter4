@@ -43,7 +43,7 @@
                 <th>Tanggal</th>
                 <th>Keterangan</th>
                 <th>Deskripsi</th>
-                <th style="width: 15%">Action</th>
+                <th style="width: 20%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +57,7 @@
                   <td><?= $transaksi->ketjurnal ?></td>
                   <td><?= $transaksi->deskripsi ?></td>
                   <td class="text-center">
+                    <a href="<?= site_url('transaksi/' . $transaksi->id_transaksi) ?>" class="btn btn-info btn-sm"><i class="fas fa-bars"></i> Detail</a>
                     <a href="<?= site_url('transaksi/' . $transaksi->id_transaksi . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                     <form action="<?= site_url('transaksi/' . $transaksi->id_transaksi) ?>" method="post" id="delete-<?= $transaksi->id_transaksi ?>" class="d-inline">
                       <?= csrf_field() ?>
