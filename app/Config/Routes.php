@@ -27,3 +27,8 @@ $routes->resource('transaksi');
 $routes->get('/jurnalumum', 'JurnalUmum::index');
 $routes->post('/jurnalumum', 'JurnalUmum::index');
 $routes->post('/jurnalumum/printjurnalumum', 'JurnalUmum::printjurnalumum');
+
+// Posting
+$routes->get('/posting', 'Posting::index');
+$routes->post('/posting', 'Posting::index');
+$routes->post('/posting/printposting', 'Posting::printposting');

@@ -66,4 +66,18 @@ class ModelTransaksi extends Model
 
     return $query->get()->getResultObject();
   }
+
+  public function getPosting($startDate, $endDate, $akun2Id)
+  {
+    $query = $this->db->table('nilai')
+      ->join('transaksi', 'transaksi.id_transaksi = nilai.id_transaksi')
+      ->join('akun2s', 'akun2s.id_akun2 = nilai.id_akun2')
+      ->orderBy('akun2s.id_akun2');
+
+    if ($startDate && $endDate) {
+      $query->where('tanggal >=', $startDate)->where('tanggal <=', $endDate)->where('nilai.id_akun2', $akun2Id);
+    }
+
+    return $query->get()->getResultObject();
+  }
 }
