@@ -80,4 +80,21 @@ class ModelTransaksi extends Model
 
     return $query->get()->getResultObject();
   }
+
+  public function getNeracaSaldo($startDate, $endDate)
+  {
+    $query = $this->db->table('nilai')
+      ->join('transaksi', 'transaksi.id_transaksi = nilai.id_transaksi')
+      ->join('akun2s', 'akun2s.id_akun2 = nilai.id_akun2')
+      ->selectSum('debit', 'jumlah_debit')
+      ->selectSum('kredit', 'jumlah_kredit')
+      ->select('akun2s.kode_akun2, akun2s.nama_akun2, transaksi.tanggal, debit, kredit')
+      ->groupBy('akun2s.kode_akun2');
+
+    if ($startDate && $endDate) {
+      $query->where('tanggal >=', $startDate)->where('tanggal <=', $endDate);
+    }
+
+    return $query->get()->getResultObject();
+  }
 }

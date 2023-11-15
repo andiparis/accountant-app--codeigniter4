@@ -32,3 +32,8 @@ $routes->post('/jurnalumum/printjurnalumum', 'JurnalUmum::printjurnalumum');
 $routes->get('/posting', 'Posting::index');
 $routes->post('/posting', 'Posting::index');
 $routes->post('/posting/printposting', 'Posting::printposting');
+
+// Neraca Saldo
+$routes->get('/neracasaldo', 'NeracaSaldo::index');
+$routes->post('/neracasaldo', 'NeracaSaldo::index');
+$routes->post('/neracasaldo/printneracasaldo', 'NeracaSaldo::printneracasaldo');
