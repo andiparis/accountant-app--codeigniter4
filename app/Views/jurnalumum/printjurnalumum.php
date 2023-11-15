@@ -4,12 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Print Jurnal Umum</title>
   <style>
-    .text-left {
-      text-align: left;
-    }
-
     .text-center {
       text-align: center;
     }
@@ -50,9 +46,9 @@
       foreach ($transaksiData as $key => $transaksi) {
       ?>
         <tr>
-          <td class="text-left" width="50"><?= $transaksi->tanggal ?></td>
+          <td width="50"><?= $transaksi->tanggal ?></td>
           <?php if ($transaksi->debit <> 0) { ?>
-            <td class="text-left" width="150"><?= $transaksi->nama_akun2 ?></td>
+            <td width="150"><?= $transaksi->nama_akun2 ?></td>
           <?php } else { ?>
             <td class="text-specific" width="150">&nbsp;&nbsp;&nbsp;&nbsp;<?= $transaksi->nama_akun2 ?></td>
           <?php } ?>
