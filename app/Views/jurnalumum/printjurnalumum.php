@@ -16,7 +16,6 @@
 
     .text-specific {
       font-style: italic;
-      word-spacing: 90px;
     }
 
     .heading {
@@ -28,7 +27,11 @@
 
 <body>
   <p class="heading">Jurnal Umum</p>
-  <p>Periode : <?= date('d F Y', strtotime($startDate)) . ' s/d ' . date('d F Y', strtotime($endDate)) ?></p>
+  <?php if ($startDate != null && $endDate != null) { ?>
+    <p>Periode : <?= date('d F Y', strtotime($startDate)) . ' s/d ' . date('d F Y', strtotime($endDate)) ?></p>
+  <?php } else { ?>
+    <p>Periode : -</p>
+  <?php } ?>
   <br><br>
 
   <table border="0.1px">
@@ -60,8 +63,7 @@
     </tbody>
   </table>
 
-  <br><br>
-  <?php echo date('l, d-m-y'); ?>
+  <?php echo '<p>' . date('l, d F Y') . '</p>' ?>
   <br>
   <p>Store Manajer _____________</p>
 </body>

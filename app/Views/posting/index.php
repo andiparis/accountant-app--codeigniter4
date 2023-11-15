@@ -43,12 +43,12 @@
           <table class="table table-striped table-md">
             <thead>
               <tr>
-                <th class="text-center" rowspan="2">Tanggal</th>
-                <th class="text-center" rowspan="2">Keterangan</th>
-                <th class="text-center" rowspan="2">Ref</th>
-                <th class="text-center" rowspan="2">Debit</th>
-                <th class="text-center" rowspan="2">Kredit</th>
-                <th class="text-center" colspan="2">Saldo</th>
+                <td class="text-center" rowspan="2">Tanggal</td>
+                <td class="text-center" rowspan="2">Keterangan</td>
+                <td class="text-center" rowspan="2">Ref</td>
+                <td class="text-center" rowspan="2">Debit</td>
+                <td class="text-center" rowspan="2">Kredit</td>
+                <td class="text-center" colspan="2">Saldo</td>
               </tr>
               <tr>
                 <td class="text-center">Debit</td>
@@ -70,7 +70,7 @@
               ?>
                 <tr>
                   <td><?= $transaksi->tanggal ?></td>
-                  <td><?= $transaksi->kode_akun2 ?></td>
+                  <td class="text-center"><?= $transaksi->kode_akun2 ?></td>
                   <td><?= $transaksi->ketjurnal ?></td>
                   <td class="text-right"><?= number_format($transaksi->debit, 0, ',', '.') ?></td>
                   <td class="text-right"><?= number_format($transaksi->kredit, 0, ',', '.') ?></td>
