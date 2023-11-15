@@ -49,6 +49,21 @@ class ModelTransaksi extends Model
       $number = intval($query['kwitansi']) + 1;
     }
     $kwitansiNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
+
     return $kwitansiNumber;
+  }
+
+  public function getJurnalUmum($startDate, $endDate)
+  {
+    $query = $this->db->table('nilai')
+      ->join('transaksi', 'transaksi.id_transaksi = nilai.id_transaksi')
+      ->join('akun2s', 'akun2s.id_akun2 = nilai.id_akun2')
+      ->orderBy('id_nilai');
+
+    if ($startDate && $endDate) {
+      $query->where('tanggal >=', $startDate)->where('tanggal <=', $endDate);
+    }
+
+    return $query->get()->getResultObject();
   }
 }

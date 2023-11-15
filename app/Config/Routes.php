@@ -22,3 +22,8 @@ $routes->resource('akun2');
 $routes->get('/transaksi/akun2', 'Transaksi::akun2');
 $routes->get('/transaksi/status', 'Transaksi::status');
 $routes->resource('transaksi');
+
+// Jurnal Umum
+$routes->get('/jurnalumum', 'JurnalUmum::index');
+$routes->post('/jurnalumum', 'JurnalUmum::index');
+$routes->post('/jurnalumum/printjurnalumum', 'JurnalUmum::printjurnalumum');
