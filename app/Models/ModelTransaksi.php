@@ -97,4 +97,30 @@ class ModelTransaksi extends Model
 
     return $query->get()->getResultObject();
   }
+
+  public function getNeracaLajur($startDate, $endDate)
+  {
+    $where = '';
+    if ($startDate && $endDate) {
+      $where = "WHERE transaksi.tanggal >= '" . $startDate . "' AND transaksi.tanggal <= '" . $endDate . "'";
+    }
+
+    $query = $this->db->query(
+      "SELECT
+        akun1.kode_akun1,
+        akun2.kode_akun2,
+        akun2.nama_akun2,
+        transaksi.tanggal AS tanggal,
+        sum(nilai.debit) AS jumlah_debit,
+        sum(nilai.kredit) AS jumlah_kredit          
+      FROM nilai
+      JOIN transaksi ON transaksi.id_transaksi = nilai.id_transaksi
+      JOIN akun2s AS akun2 ON nilai.id_akun2 = akun2.id_akun2
+      JOIN akun1s AS akun1 ON akun1.id_akun1 = akun2.id_akun1
+      $where
+      GROUP BY akun2.kode_akun2"
+    );
+
+    return $query->getResultObject();
+  }
 }

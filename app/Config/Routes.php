@@ -37,3 +37,8 @@ $routes->post('/posting/printposting', 'Posting::printposting');
 $routes->get('/neracasaldo', 'NeracaSaldo::index');
 $routes->post('/neracasaldo', 'NeracaSaldo::index');
 $routes->post('/neracasaldo/printneracasaldo', 'NeracaSaldo::printneracasaldo');
+
+// Laba Rugi
+$routes->get('/labarugi', 'LabaRugi::index');
+$routes->post('/labarugi', 'LabaRugi::index');
+$routes->post('/labarugi/printlabarugi', 'LabaRugi::printlabarugi');
