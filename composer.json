@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
+        "myth/auth": "^1.2",
         "tecnickcom/tcpdf": "^6.6"
     },
     "require-dev": {
