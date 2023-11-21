@@ -17,3 +17,8 @@ change to
 
 also comment this code below
   // 'Myth\Auth\Authentication\Passwords\PwnedValidator',
+
+also fill this code below
+  public $defaultUserGroup;  
+to something like this
+  public $defaultUserGroup = 'user';
