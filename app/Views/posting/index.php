@@ -41,7 +41,7 @@
       <div class="card-body p-4">
         <div class="table-responsive">
           <table class="table table-striped table-md">
-            <thead>
+            <thead class="heading">
               <tr>
                 <td class="text-center" rowspan="2">Tanggal</td>
                 <td class="text-center" rowspan="2">Keterangan</td>
