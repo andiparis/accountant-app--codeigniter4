@@ -3,9 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ModelAkun2;
-use App\Models\ModelNilai;
-use App\Models\ModelStatus;
 use App\Models\ModelTransaksi;
 use TCPDF;
 

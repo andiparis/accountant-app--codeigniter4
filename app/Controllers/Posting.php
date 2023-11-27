@@ -4,16 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ModelAkun2;
-use App\Models\ModelNilai;
-use App\Models\ModelStatus;
 use App\Models\ModelTransaksi;
 use TCPDF;
 
 /**
  * @property objTransaksi $objTransaksi
  * @property objAkun2 $objAkun2
- * @property objNilai $objNilai
- * @property objStatus $objStatus
  */
 
 class Posting extends BaseController
@@ -23,8 +19,6 @@ class Posting extends BaseController
     $this->db = \Config\Database::connect();
     $this->objTransaksi = new ModelTransaksi();
     $this->objAkun2 = new ModelAkun2();
-    $this->objNilai = new ModelNilai();
-    $this->objStatus = new ModelStatus();
   }
 
   public function index()
