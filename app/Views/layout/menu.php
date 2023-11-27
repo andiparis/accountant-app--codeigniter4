@@ -44,7 +44,7 @@
     <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Laporan Keuangan</span></a>
     <ul class="dropdown-menu">
       <li><a class="nav-link" href="<?= site_url('labarugi') ?>">Laba Rugi</a></li>
-      <li><a class="nav-link" href="#">Arus Kas</a></li>
+      <li><a class="nav-link" href="<?= site_url('aruskas') ?>">Arus Kas</a></li>
     </ul>
   </li>
 <?php } ?>
