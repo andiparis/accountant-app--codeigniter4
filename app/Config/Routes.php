@@ -48,5 +48,11 @@ $routes->get('/labarugi/index', 'LabaRugi::index', ['filter' => 'role:direktur']
 $routes->post('/labarugi', 'LabaRugi::index', ['filter' => 'role:direktur']);
 $routes->post('/labarugi/printlabarugi', 'LabaRugi::printlabarugi', ['filter' => 'role:direktur']);
 
+// Arus Kas
+$routes->get('/aruskas', 'ArusKas::index', ['filter' => 'role:direktur']);
+$routes->get('/aruskas/index', 'ArusKas::index', ['filter' => 'role:direktur']);
+$routes->post('/aruskas', 'ArusKas::index', ['filter' => 'role:direktur']);
+$routes->post('/aruskas/printaruskas', 'ArusKas::printaruskas', ['filter' => 'role:direktur']);
+
 // User
 $routes->resource('user', ['filter' => 'role:manajer']);
