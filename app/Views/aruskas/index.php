@@ -32,125 +32,112 @@
       </div>
       <div class="card-body p-4">
         <div class="table-responsive">
-          <table class="table table-striped table-md">
-            <tr class="heading" style="background-color: darkorchid;">
-              <td class="text-center">Deskripsi</td>
-              <td class="text-center" width="200px">Sub Total</td>
-              <td class="text-center" width="200px">Total</td>
+          <table class="table table-hover table-striped table-md">
+            <!-- Penerimaan -->
+            <tr>
+              <td>Arus Kas dari Aktivitas Usaha</td>
+              <td></td>
+            </tr>
+            <?php
+            $totpenerimaan = 0;
+            foreach ($arusKasData as $key => $value) {
+              if ($value->id_status == 1) {
+                $penerimaan = $value->debit;
+                $totpenerimaan += $penerimaan;
+              }
+            }
+            ?>
+            <tr>
+              <td style="padding-left: 3em; font-style: italic;">Penerimaan Kas dari Pelanggan</td>
+              <td class="text-right"><?= number_format($totpenerimaan, 0, ',', '.') ?></td>
+            </tr>
+            <!-- Pengeluaran -->
+            <tr>
+              <td>Pengeluaran Kas</td>
+              <td></td>
+            </tr>
+            <?php
+            $totpengeluaran = 0;
+            foreach ($arusKasData as $key => $value) {
+              if ($value->id_status == 2) {
+                $pengeluaran = $value->kredit;
+                $totpengeluaran += $pengeluaran;
+            ?>
+                <tr>
+                  <td style="padding-left: 3em; font-style: italic;"><?= $value->ketjurnal ?></td>
+                  <td class="text-right" style="padding-right: 6em;"><?= number_format($totpengeluaran, 0, ',', '.') ?></td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+            <tr>
+              <td>Jumlah Pengeluaran</td>
+              <td class="text-right"><?= number_format($totpengeluaran, 0, ',', '.') ?></td>
+            </tr>
+            <tr style="font-weight: bold;">
+              <td>Arus Kas Bersih dari Aktivitas Usaha</td>
+              <td class="text-right"><?= number_format($totpenerimaan - $totpengeluaran, 0, ',', '.') ?></td>
             </tr>
 
             <tr>
-              <td colspan="3"><b>AKTIVITAS OPERASIONAL</b></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <!-- Modal -->
+            <tr>
+              <td>Modal Masuk</td>
+              <td></td>
             </tr>
             <?php
-            $totalOperating = 0;
-
-            foreach ($neracaLajurData as $key => $value) {
-              $debit = $value->jumlah_debit;
-              $kredit = $value->jumlah_kredit;
-              $neraca = $debit - $kredit;
-
-              $kodeAkun = $value->kode_akun2;
-              $kode1 = substr($kodeAkun, 0, 1);
-              $kode2 = substr($kodeAkun, 0, 2);
-
-              if ($kode2 == 11 && $neraca > 0) {
-                $totalOperating += $neraca;
-              }
-              if ($kode1 == 4) {
-                $neraca = abs($neraca);
-                $totalOperating += $neraca;
-              }
-              if ($kode1 == 5) {
-                $totalOperating -= $neraca;
-              }
+            $modal = 0;
+            foreach ($arusKasData as $key => $value) {
+              if ($value->id_status == 3) {
+                $setor = $value->debit;
+                $modal += $setor;
             ?>
-              <?php if (($kode2 == 11 && $neraca > 0) || $kode1 == 4 || $kode1 == 5) { ?>
                 <tr>
-                  <td><?= $value->nama_akun2 ?></td>
-                  <td class="text-right" width="200px"><?= number_format($neraca, 0, ',', '.') ?></td>
-                  <td width="200px"></td>
+                  <td style="padding-left: 3em; font-style: italic;"><?= $value->ketjurnal ?></td>
+                  <td class="text-right" style="padding-right: 6em;"><?= number_format($modal, 0, ',', '.') ?></td>
                 </tr>
-              <?php } ?>
-            <?php } ?>
-            <tr class="heading2" style="background-color: darkmagenta;">
+            <?php
+              }
+            }
+            ?>
+            <!-- Prive -->
+            <tr>
+              <td>Modal Keluar</td>
               <td></td>
-              <td class="text-right">Total</td>
-              <td class="text-right"><?= number_format($totalOperating, 0, ',', '.') ?></td>
+            </tr>
+            <?php
+            $tprive = 0;
+            foreach ($arusKasData as $key => $value) {
+              if ($value->id_status == 4) {
+                $prive = $value->kredit;
+                $tprive += $prive;
+            ?>
+                <tr>
+                  <td style="padding-left: 3em; font-style: italic;"><?= $value->ketjurnal ?></td>
+                  <td class="text-right" style="padding-right: 6em;"><?= number_format($tprive, 0, ',', '.') ?></td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+            <tr style="font-weight: bold;">
+              <td>Arus Kas Bersih dari Aktivitas Investasi</td>
+              <td class="text-right"><?= number_format($modal - $tprive, 0, ',', '.') ?></td>
             </tr>
 
             <tr>
-              <td colspan="3"><b>AKTIVITAS INVESTASI</b></td>
-            </tr>
-            <?php
-            $totalInvesting = 0;
-
-            foreach ($neracaLajurData as $key => $value) {
-              $debit = $value->jumlah_debit;
-              $kredit = $value->jumlah_kredit;
-              $neraca = $debit - $kredit;
-
-              $kodeAkun = $value->kode_akun2;
-              $kode2 = substr($kodeAkun, 0, 2);
-
-              if ($kode2 == 12) {
-                $totalInvesting += $neraca;
-              }
-            ?>
-              <?php if ($kode2 == 12) { ?>
-                <tr>
-                  <td><?= $value->nama_akun2 ?></td>
-                  <td class="text-right" width="200px"><?= number_format($neraca, 0, ',', '.') ?></td>
-                  <td width="200px"></td>
-                </tr>
-              <?php } ?>
-            <?php } ?>
-            <tr class="heading2" style="background-color: darkmagenta;">
               <td></td>
-              <td class="text-right">Total</td>
-              <td class="text-right"><?= number_format($totalInvesting, 0, ',', '.') ?></td>
-            </tr>
-
-            <tr>
-              <td colspan="3"><b>AKTIVITAS PENDANAAN</b></td>
-            </tr>
-            <?php
-            $totalFinancing = 0;
-
-            foreach ($neracaLajurData as $key => $value) {
-              $debit = $value->jumlah_debit;
-              $kredit = $value->jumlah_kredit;
-              $neraca = $debit - $kredit;
-
-              $kodeAkun = $value->kode_akun2;
-              $kode2 = substr($kodeAkun, 0, 2);
-
-              if ($kode2 == 31) {
-                $neraca = abs($neraca);
-                $totalFinancing += $neraca;
-              }
-              if ($kode2 == 32) {
-                $totalFinancing -= $neraca;
-              }
-            ?>
-              <?php if ($kode2 == 31 || $kode2 == 32) { ?>
-                <tr>
-                  <td><?= $value->nama_akun2 ?></td>
-                  <td class="text-right" width="200px"><?= number_format($neraca, 0, ',', '.') ?></td>
-                  <td width="200px"></td>
-                </tr>
-              <?php } ?>
-            <?php } ?>
-            <tr class="heading2" style="background-color: darkmagenta;">
               <td></td>
-              <td class="text-right">Total</td>
-              <td class="text-right"><?= number_format($totalFinancing, 0, ',', '.') ?></td>
             </tr>
 
-            <tr class="heading2" style="background-color: purple;">
-              <td></td>
-              <td class="text-right">Arus Kas</td>
-              <td class="text-right"><?= number_format($totalOperating + $totalInvesting + $totalFinancing, 0, ',', '.') ?></td>
+            <tr style="font-weight: bold;">
+              <td>Saldo Kas Akhir Periode</td>
+              <td class="text-right"><?= number_format(($totpenerimaan - $totpengeluaran) + ($modal - $tprive), 0, ',', '.') ?></td>
             </tr>
           </table>
         </div>

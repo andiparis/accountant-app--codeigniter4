@@ -23,10 +23,12 @@ class ArusKas extends BaseController
     $startDate = $this->request->getVar('start_date') ? $this->request->getVar('start_date') : '';
     $endDate = $this->request->getVar('end_date') ? $this->request->getVar('end_date') : '';
 
-    $neracaLajurData = $this->objTransaksi->getNeracaLajur($startDate, $endDate);
-    $data['neracaLajurData'] = $neracaLajurData;
-    $data['startDate'] = $startDate;
-    $data['endDate'] = $endDate;
+    $arusKasData = $this->objTransaksi->getArusKas($startDate, $endDate);
+    $data = [
+      'arusKasData' => $arusKasData,
+      'startDate'   => $startDate,
+      'endDate'     => $endDate,
+    ];
 
     return view('aruskas/index', $data);
   }
@@ -36,10 +38,12 @@ class ArusKas extends BaseController
     $startDate = $this->request->getVar('start_date') ? $this->request->getVar('start_date') : '';
     $endDate = $this->request->getVar('end_date') ? $this->request->getVar('end_date') : '';
 
-    $neracaLajurData = $this->objTransaksi->getNeracaLajur($startDate, $endDate);
-    $data['neracaLajurData'] = $neracaLajurData;
-    $data['startDate'] = $startDate;
-    $data['endDate'] = $endDate;
+    $arusKasData = $this->objTransaksi->getArusKas($startDate, $endDate);
+    $data = [
+      'arusKasData' => $arusKasData,
+      'startDate'   => $startDate,
+      'endDate'     => $endDate,
+    ];
 
     $html = view('aruskas/printaruskas', $data);
     $pdf = new TCPDF('P', PDF_UNIT, 'A4', true, 'UTF-8', false);
