@@ -123,4 +123,19 @@ class ModelTransaksi extends Model
 
     return $query->getResultObject();
   }
+
+  public function getArusKas($startDate, $endDate)
+  {
+    $query = $this->db->table('nilai')
+      ->join('transaksi', 'transaksi.id_transaksi = nilai.id_transaksi')
+      ->join('akun2s', 'akun2s.id_akun2 = nilai.id_akun2')
+      ->select('akun2s.kode_akun2, akun2s.nama_akun2, transaksi.tanggal, debit, kredit, id_status, ketjurnal')
+      ->where('akun2s.kode_akun2 = 1101');
+
+    if ($startDate && $endDate) {
+      $query->where('tanggal >=', $startDate)->where('tanggal <=', $endDate);
+    }
+
+    return $query->get()->getResultObject();
+  }
 }
