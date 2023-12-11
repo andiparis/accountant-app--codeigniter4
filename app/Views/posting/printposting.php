@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Print Posting</title>
+  <title>Print Buku Besar</title>
   <style>
     .text-center {
       text-align: center;
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-  <p class="heading">Posting</p>
+  <p class="heading">Buku Besar</p>
   <?php if ($startDate != null && $endDate != null) { ?>
     <p>Periode : <?= date('d F Y', strtotime($startDate)) . ' s/d ' . date('d F Y', strtotime($endDate)) ?></p>
   <?php } else { ?>

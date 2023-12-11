@@ -1,14 +1,14 @@
 <?= $this->extend('layout/backend') ?>
 
 <?= $this->section('title') ?>
-<title>SIA &mdash; Posting</title>
+<title>SIA &mdash; Buku Besar</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
 <section class="section">
   <div class="section-header">
-    <h1>Laporan Posting</h1>
+    <h1>Laporan Buku Besar</h1>
   </div>
 
   <div class="section-body">

@@ -59,6 +59,6 @@ class Posting extends BaseController
     $pdf->AddPage();
     $pdf->writeHTML($html, true, false, true, false, '');
     $this->response->setContentType('application/pdf');
-    $pdf->Output('posting.pdf', 'I');
+    $pdf->Output('bukubesar.pdf', 'I');
   }
 }
