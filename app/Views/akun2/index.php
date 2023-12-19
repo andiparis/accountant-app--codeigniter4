@@ -1,7 +1,7 @@
 <?= $this->extend('layout/backend') ?>
 
 <?= $this->section('title') ?>
-<title>SIA &mdash; Akun 2</title>
+<title>SIA &mdash; Akun</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -31,44 +31,244 @@
   <div class="section-body">
     <div class="card">
       <div class="card-header">
-        <h4>Data Akun 2</h4>
+        <h4>Data Akun</h4>
       </div>
-      <div class="card-body p-4">
-        <div class="table-responsive">
-          <table id="myTable" class="table table-striped table-md">
-            <thead>
-              <tr>
-                <th style="width: 5%">No</th>
-                <th>Nama Akun 1</th>
-                <th>Kode Akun 2</th>
-                <th>Nama Akun 2</th>
-                <th style="width: 15%">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach ($akun2Data as $key => $akun2) {
-              ?>
+      <div class="card-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="aktiva-tab" data-toggle="tab" href="#aktiva" role="tab" aria-controls="aktiva" aria-selected="true">Aktiva</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="hutang-tab" data-toggle="tab" href="#hutang" role="tab" aria-controls="hutang" aria-selected="false">Hutang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="modal-tab" data-toggle="tab" href="#modal" role="tab" aria-controls="modal" aria-selected="false">Modal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pendapatan-tab" data-toggle="tab" href="#pendapatan" role="tab" aria-controls="pendapatan" aria-selected="false">Pendapatan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="beban-tab" data-toggle="tab" href="#beban" role="tab" aria-controls="beban" aria-selected="false">Beban</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="aktiva" role="tabpanel" aria-labelledby="aktiva-tab">
+            <table class="table table-striped table-md">
+              <thead>
                 <tr>
-                  <td><?= $key + 1 ?></td>
-                  <td><?= $akun2->nama_akun1 ?></td>
-                  <td><?= $akun2->kode_akun2 ?></td>
-                  <td><?= $akun2->nama_akun2 ?></td>
-                  <td class="text-center">
-                    <a href="<?= site_url('akun2/' . $akun2->id_akun2 . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
-                    <form action="<?= site_url('akun2/' . $akun2->id_akun2) ?>" method="post" id="delete-<?= $akun2->id_akun2 ?>" class="d-inline">
-                      <?= csrf_field() ?>
-                      <input type="hidden" name="_method" value="DELETE">
-                      <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun 1 ini?" data-confirm-yes="deleteData(<?= $akun2->id_akun2 ?>)"><i class="fas fa-trash"></i> Delete</button>
-                    </form>
-                  </td>
+                  <th style="width: 5%">No</th>
+                  <th>Kode Akun</th>
+                  <th>Nama Akun</th>
+                  <th style="width: 15%">Action</th>
                 </tr>
-              <?php } ?>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <?php
+                $aktiva = $akun[0];
+                foreach ($aktiva as $key => $value) {
+                  $style = '';
+                  $accountType = '';
+
+                  if ($value->jenis_akun === null) {
+                    $style = 'text-indent: 1rem;';
+                    $accountType = 2;
+                  } else {
+                    $style = 'font-weight: bold;';
+                    $accountType = 1;
+                  }
+
+                ?>
+                  <tr>
+                    <td><?= $key + 1 ?></td>
+                    <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
+                    <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
+                    <td class="text-center">
+                      <a href="<?= site_url('akun2/' . $accountType . '/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <?php if ($value->jenis_akun === null) { ?>
+                        <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
+                          <?= csrf_field() ?>
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun ini?" data-confirm-yes="deleteData(<?= $value->kode_akun ?>)"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="hutang" role="tabpanel" aria-labelledby="hutang-tab">
+            <table class="table table-striped table-md">
+              <thead>
+                <tr>
+                  <th style="width: 5%">No</th>
+                  <th>Kode Akun</th>
+                  <th>Nama Akun</th>
+                  <th style="width: 15%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $hutang = $akun[1];
+                foreach ($hutang as $key => $value) {
+                  $style = '';
+
+                  if ($value->jenis_akun === null) {
+                    $style = 'text-indent: 1rem;';
+                  } else {
+                    $style = 'font-weight: bold;';
+                  }
+
+                ?>
+                  <tr>
+                    <td><?= $key + 1 ?></td>
+                    <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
+                    <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
+                    <td class="text-center">
+                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <?php if ($value->jenis_akun === null) { ?>
+                        <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
+                          <?= csrf_field() ?>
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun ini?" data-confirm-yes="deleteData(<?= $value->kode_akun ?>)"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="modal" role="tabpanel" aria-labelledby="modal-tab">
+            <table class="table table-striped table-md">
+              <thead>
+                <tr>
+                  <th style="width: 5%">No</th>
+                  <th>Kode Akun</th>
+                  <th>Nama Akun</th>
+                  <th style="width: 15%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $modal = $akun[2];
+                foreach ($modal as $key => $value) {
+                  $style = '';
+
+                  if ($value->jenis_akun === null) {
+                    $style = 'text-indent: 1rem;';
+                  } else {
+                    $style = 'font-weight: bold;';
+                  }
+
+                ?>
+                  <tr>
+                    <td><?= $key + 1 ?></td>
+                    <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
+                    <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
+                    <td class="text-center">
+                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <?php if ($value->jenis_akun === null) { ?>
+                        <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
+                          <?= csrf_field() ?>
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun ini?" data-confirm-yes="deleteData(<?= $value->kode_akun ?>)"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pendapatan" role="tabpanel" aria-labelledby="pendapatan-tab">
+            <table class="table table-striped table-md">
+              <thead>
+                <tr>
+                  <th style="width: 5%">No</th>
+                  <th>Kode Akun</th>
+                  <th>Nama Akun</th>
+                  <th style="width: 15%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $pendapatan = $akun[3];
+                foreach ($pendapatan as $key => $value) {
+                  $style = '';
+
+                  if ($value->jenis_akun === null) {
+                    $style = 'text-indent: 1rem;';
+                  } else {
+                    $style = 'font-weight: bold;';
+                  }
+
+                ?>
+                  <tr>
+                    <td><?= $key + 1 ?></td>
+                    <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
+                    <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
+                    <td class="text-center">
+                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <?php if ($value->jenis_akun === null) { ?>
+                        <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
+                          <?= csrf_field() ?>
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun ini?" data-confirm-yes="deleteData(<?= $value->kode_akun ?>)"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="beban" role="tabpanel" aria-labelledby="beban-tab">
+            <table class="table table-striped table-md">
+              <thead>
+                <tr>
+                  <th style="width: 5%">No</th>
+                  <th>Kode Akun</th>
+                  <th>Nama Akun</th>
+                  <th style="width: 15%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $beban = $akun[4];
+                foreach ($beban as $key => $value) {
+                  $style = '';
+
+                  if ($value->jenis_akun === null) {
+                    $style = 'text-indent: 1rem;';
+                  } else {
+                    $style = 'font-weight: bold;';
+                  }
+
+                ?>
+                  <tr>
+                    <td><?= $key + 1 ?></td>
+                    <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
+                    <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
+                    <td class="text-center">
+                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <?php if ($value->jenis_akun === null) { ?>
+                        <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
+                          <?= csrf_field() ?>
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-danger btn-sm" data-confirm="Konfirmasi Hapus Data | Apakah anda yakin ingin menghapus data akun ini?" data-confirm-yes="deleteData(<?= $value->kode_akun ?>)"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
