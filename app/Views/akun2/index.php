@@ -112,20 +112,22 @@
                 $hutang = $akun[1];
                 foreach ($hutang as $key => $value) {
                   $style = '';
+                  $accountType = '';
 
                   if ($value->jenis_akun === null) {
                     $style = 'text-indent: 1rem;';
+                    $accountType = 2;
                   } else {
                     $style = 'font-weight: bold;';
+                    $accountType = 1;
                   }
-
                 ?>
                   <tr>
                     <td><?= $key + 1 ?></td>
                     <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
                     <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
                     <td class="text-center">
-                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <a href="<?= site_url('akun2/' . $accountType . '/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                       <?php if ($value->jenis_akun === null) { ?>
                         <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
                           <?= csrf_field() ?>
@@ -154,20 +156,22 @@
                 $modal = $akun[2];
                 foreach ($modal as $key => $value) {
                   $style = '';
+                  $accountType = '';
 
                   if ($value->jenis_akun === null) {
                     $style = 'text-indent: 1rem;';
+                    $accountType = 2;
                   } else {
                     $style = 'font-weight: bold;';
+                    $accountType = 1;
                   }
-
                 ?>
                   <tr>
                     <td><?= $key + 1 ?></td>
                     <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
                     <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
                     <td class="text-center">
-                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <a href="<?= site_url('akun2/' . $accountType . '/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                       <?php if ($value->jenis_akun === null) { ?>
                         <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
                           <?= csrf_field() ?>
@@ -196,20 +200,22 @@
                 $pendapatan = $akun[3];
                 foreach ($pendapatan as $key => $value) {
                   $style = '';
+                  $accountType = '';
 
                   if ($value->jenis_akun === null) {
                     $style = 'text-indent: 1rem;';
+                    $accountType = 2;
                   } else {
                     $style = 'font-weight: bold;';
+                    $accountType = 1;
                   }
-
                 ?>
                   <tr>
                     <td><?= $key + 1 ?></td>
                     <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
                     <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
                     <td class="text-center">
-                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <a href="<?= site_url('akun2/' . $accountType . '/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                       <?php if ($value->jenis_akun === null) { ?>
                         <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
                           <?= csrf_field() ?>
@@ -238,20 +244,22 @@
                 $beban = $akun[4];
                 foreach ($beban as $key => $value) {
                   $style = '';
+                  $accountType = '';
 
                   if ($value->jenis_akun === null) {
                     $style = 'text-indent: 1rem;';
+                    $accountType = 2;
                   } else {
                     $style = 'font-weight: bold;';
+                    $accountType = 1;
                   }
-
                 ?>
                   <tr>
                     <td><?= $key + 1 ?></td>
                     <td style="<?= $style ?>"><?= $value->kode_akun ?></td>
                     <td style="<?= $style ?>"><?= $value->nama_akun ?></td>
                     <td class="text-center">
-                      <a href="<?= site_url('akun2/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                      <a href="<?= site_url('akun2/' . $accountType . '/' . $value->kode_akun . '/edit') ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                       <?php if ($value->jenis_akun === null) { ?>
                         <form action="<?= site_url('akun2/' . $value->kode_akun) ?>" method="post" id="delete-<?= $value->kode_akun ?>" class="d-inline">
                           <?= csrf_field() ?>
