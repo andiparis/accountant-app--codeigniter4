@@ -25,7 +25,12 @@ class Akun2 extends ResourceController
    */
   public function index()
   {
-    $data['akun2Data'] = $this->objAkun2->getAkun2WithAkun1();
+    $accountType = [1, 2, 3, 4, 5];
+
+    $data = [
+      'akun'        => $this->objAkun2->getAkun($accountType),
+    ];
+
     return view('akun2/index', $data);
   }
 
@@ -46,9 +51,10 @@ class Akun2 extends ResourceController
    */
   public function new()
   {
-    $builder = $this->db->table('akun1s');
-    $query = $builder->get();
-    $data['akun1Data'] = $query->getResult();
+    $data = [
+      'akun1Data'   => $this->objAkun2->getAkun1(),
+    ];
+
     return view('akun2/new', $data);
   }
 
@@ -60,12 +66,25 @@ class Akun2 extends ResourceController
   public function create()
   {
     $data = $this->request->getPost();
-    $data = [
-      'kode_akun2'  => $this->request->getVar('kode_akun2'),
-      'nama_akun2'  => $this->request->getVar('nama_akun2'),
-      'id_akun1'    => $this->request->getVar('id_akun1'),
-    ];
-    $this->db->table('akun2s')->insert($data);
+
+    $statusAkun = $this->request->getVar('status_akun');
+
+    if ($statusAkun === '1') {
+      $data = [
+        'kode_akun1'  => $this->request->getVar('kode_akun'),
+        'nama_akun1'  => $this->request->getVar('nama_akun'),
+        'jenis_akun'  => $this->request->getVar('jenis_akun'),
+      ];
+      $this->db->table('akun1s')->insert($data);
+    } else {
+      $data = [
+        'kode_akun2'  => $this->request->getVar('kode_akun'),
+        'nama_akun2'  => $this->request->getVar('nama_akun'),
+        'id_akun1'    => $this->request->getVar('id_akun_parent'),
+      ];
+      $this->db->table('akun2s')->insert($data);
+    }
+
     return redirect()->to(site_url('akun2'))->with('success', 'Data berhasil di simpan');
   }
 
@@ -74,15 +93,23 @@ class Akun2 extends ResourceController
    *
    * @return mixed
    */
-  public function edit($id = null)
+  public function edit($accountType = null, $id = null)
   {
-    $builder = $this->db->table('akun1s');
-    $query = $builder->get();
+    if ($accountType == 1) {
+      $table = 'akun1s';
+      $tableField = 'kode_akun1';
+    } else {
+      $table = 'akun2s';
+      $tableField = 'kode_akun2';
+    }
+    $akun = $this->objAkun2->getAkunById($id, $table, $tableField);
 
-    $akun2 = $this->objAkun2->find($id);
-    if (is_object($akun2)) {
-      $data['akun1Data'] = $query->getResult();
-      $data['akun2Data'] = $akun2;
+    if (is_object($akun)) {
+      $data = [
+        'akun1'   => $this->objAkun2->getAkun1(),
+        'akun'    => $akun,
+      ];
+
       return view('akun2/edit', $data);
     } else {
       throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -94,14 +121,24 @@ class Akun2 extends ResourceController
    *
    * @return mixed
    */
-  public function update($id = null)
+  public function update($accountType = null, $id = null)
   {
-    $data = [
-      'kode_akun2'  => $this->request->getVar('kode_akun2'),
-      'nama_akun2'  => $this->request->getVar('nama_akun2'),
-      'id_akun1'    => $this->request->getVar('id_akun1'),
-    ];
-    $this->db->table('akun2s')->where(['id_akun2' => $id])->update($data);
+    if ($accountType === '1') {
+      $data = [
+        'kode_akun1'  => $this->request->getVar('kode_akun'),
+        'nama_akun1'  => $this->request->getVar('nama_akun'),
+        'jenis_akun'  => $this->request->getVar('jenis_akun'),
+      ];
+      $this->db->table('akun1s')->where(['kode_akun1' => $id])->update($data);
+    } else {
+      $data = [
+        'kode_akun2'  => $this->request->getVar('kode_akun'),
+        'nama_akun2'  => $this->request->getVar('nama_akun'),
+        'id_akun1'    => $this->request->getVar('id_akun_parent'),
+      ];
+      $this->db->table('akun2s')->where(['kode_akun2' => $id])->update($data);
+    }
+
     return redirect()->to(site_url('akun2'))->with('success', 'Data berhasil di update');
   }
 
@@ -112,7 +149,7 @@ class Akun2 extends ResourceController
    */
   public function delete($id = null)
   {
-    $this->db->table('akun2s')->where(['id_akun2' => $id])->delete();
+    $this->db->table('akun2s')->where(['kode_akun2' => $id])->delete();
     return redirect()->to(site_url('akun2'))->with('success', 'Data berhasil di hapus');
   }
 }
