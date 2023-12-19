@@ -1,7 +1,7 @@
 <?= $this->extend('layout/backend') ?>
 
 <?= $this->section('title') ?>
-<title>SIA &mdash; Edit Akun 2</title>
+<title>SIA &mdash; Edit Akun</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -14,28 +14,57 @@
   <div class="section-body">
     <div class="card">
       <div class="card-header">
-        <h4>Edit Data Akun 2</h4>
+        <h4>Edit Data Akun</h4>
       </div>
       <div class="card-body p-4">
-        <form action="<?= site_url('akun2/' . $akun2Data->id_akun2) ?>" method="post">
+        <?php
+        $accountStatus = null;
+        $accountType = null;
+        $id_akun1 = null;
+
+        if (property_exists($akun, 'jenis_akun')) {
+          $accountStatus = 1;
+          $accountType = $akun->jenis_akun;
+          $kode_akun = $akun->kode_akun1;
+          $nama_akun = $akun->nama_akun1;
+        } else {
+          $accountStatus = 2;
+          $id_akun1 = $akun->id_akun1;
+          $kode_akun = $akun->kode_akun2;
+          $nama_akun = $akun->nama_akun2;
+        }
+        ?>
+        <form action="<?= site_url('akun2/' . $accountStatus . '/' . $kode_akun) ?>" method="post">
           <?= csrf_field() ?>
           <input type="hidden" name="_method" value="PUT">
+          <?php if ($accountStatus === 1) { ?>
+            <div id="accountType" class="form-group">
+              <label for="jenis_akun">Jenis Akun</label>
+              <select name="jenis_akun" id="jenis_akun" class="form-control" required>
+                <option value="1" <?= ($accountType == 1) ? 'selected' : null ?>>Aktiva</option>
+                <option value="2" <?= ($accountType == 2) ? 'selected' : null ?>>Hutang</option>
+                <option value="3" <?= ($accountType == 3) ? 'selected' : null ?>>Modal</option>
+                <option value="4" <?= ($accountType == 4) ? 'selected' : null ?>>Pendapatan</option>
+                <option value="5" <?= ($accountType == 5) ? 'selected' : null ?>>Beban</option>
+              </select>
+            </div>
+          <?php } else { ?>
+            <div id="parentAccountName" class="form-group">
+              <label for="id_akun_parent">Nama Akun Parent</label>
+              <select name="id_akun_parent" id="id_akun_parent" class="form-control" required>
+                <?php foreach ($akun1 as $key => $value) { ?>
+                  <option value="<?= $value->id_akun1 ?>" <?= $value->id_akun1 == $id_akun1 ? 'selected' : null ?>><?= $value->nama_akun1 ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          <?php } ?>
           <div class="form-group">
-            <label for="id_akun1">Nama Akun 1</label>
-            <select name="id_akun1" id="id_akun1" class="form-control" required>
-              <option value="">- Pilih nama akun 1 -</option>
-              <?php foreach ($akun1Data as $key => $akun1) { ?>
-                <option value="<?= $akun1->id_akun1 ?>" <?= $akun1->id_akun1 == $akun2Data->id_akun1 ? 'selected' : null ?>><?= $akun1->nama_akun1 ?></option>
-              <?php } ?>
-            </select>
+            <label for="kode_akun">Kode Akun</label>
+            <input type="text" name="kode_akun" id="kode_akun" placeholder="Kode akun" class="form-control" value="<?= $kode_akun ?>" required>
           </div>
           <div class="form-group">
-            <label for="kode_akun2">Kode Akun 2</label>
-            <input type="text" name="kode_akun2" id="kode_akun2" placeholder="Kode akun 2" class="form-control" value="<?= $akun2Data->kode_akun2 ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="nama_akun2">Nama Akun 2</label>
-            <input type="text" name="nama_akun2" id="nama_akun2" placeholder="Nama akun 2" class="form-control" value="<?= $akun2Data->nama_akun2 ?>" required>
+            <label for="nama_akun">Nama Akun</label>
+            <input type="text" name="nama_akun" id="nama_akun" placeholder="Nama akun" class="form-control" value="<?= $nama_akun ?>" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Update</button>
