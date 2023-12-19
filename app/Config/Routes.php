@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
+$routes->get('/home', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
 
 // Akun 1
 $routes->get('/akun1', 'Akun1::index', ['filter' => 'role:admin']);
@@ -18,6 +19,8 @@ $routes->delete('/akun1/(:any)', 'Akun1::destroy/$1', ['filter' => 'role:admin']
 
 // Akun 2
 $routes->resource('akun2', ['filter' => 'role:admin']);
+$routes->get('/akun2/(:any)/(:any)/edit', 'Akun2::edit/$1/$2', ['filter' => 'role:admin']);
+$routes->put('/akun2/(:any)/(:any)', 'Akun2::update/$1/$2', ['filter' => 'role:admin']);
 
 // Transaksi
 $routes->get('/transaksi/akun2', 'Transaksi::akun2', ['filter' => 'role:admin']);
