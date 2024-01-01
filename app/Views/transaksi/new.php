@@ -21,7 +21,7 @@
           <?= csrf_field() ?>
           <div class="form-group">
             <label for="tanggal">Tanggal</label>
-            <input type="date" name="tanggal" id="tanggal" placeholder="Tanggal" class="form-control" required>
+            <input type="date" name="tanggal" id="tanggal" placeholder="Tanggal" class="form-control" value="<?= date('Y-m-d') ?>" required>
           </div>
           <div class="form-group">
             <label for="ketjurnal">Keterangan Jurnal</label>

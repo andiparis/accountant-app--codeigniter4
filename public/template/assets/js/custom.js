@@ -44,11 +44,15 @@ function newRow() {
   baris += "</td>";
   baris += "<td>";
   baris +=
-    '<input type="number" name="debit[]" class="form-control debit" placeholder="Debit" required="">';
+    '<input type="number" id="debit' +
+    nomor +
+    '" name="debit[]" class="form-control debit" placeholder="Debit" required="">';
   baris += "</td>";
   baris += "<td>";
   baris +=
-    '<input type="number" name="kredit[]" class="form-control kredit" placeholder="Kredit" required="">';
+    '<input type="number" id="kredit' +
+    nomor +
+    '" name="kredit[]" class="form-control kredit" placeholder="Kredit" required="">';
   baris += "</td>";
   baris += "<td>";
   baris +=
@@ -67,13 +71,16 @@ function newRow() {
     $(this).find("td:nth-child(2) input").focus();
   });
 
+  document.getElementById("debit" + nomor).value = 0;
+  document.getElementById("kredit" + nomor).value = 0;
+
   formSelectAkun(nomor);
   formSelectStatus(nomor);
 }
 
 $(document).ready(function () {
   let a;
-  for (a = 1; a <= 1; a++) {
+  for (a = 1; a <= 2; a++) {
     newRow();
   }
   $("#newRow").click(function (e) {
