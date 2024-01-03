@@ -7,6 +7,20 @@
 
 "use strict";
 
+// Dynamic menu
+let path = location.pathname.split("/");
+let url = location.origin + "/" + path[1];
+$("ul.sidebar-menu li a").each(function () {
+  if ($(this).attr("href").indexOf(url) !== -1) {
+    $(this)
+      .parent()
+      .addClass("active")
+      .parent()
+      .parent("li")
+      .addClass("active");
+  }
+});
+
 // Chart
 const statistics_chart = document.getElementById("myChart").getContext("2d");
 
@@ -77,20 +91,6 @@ fetch("http://localhost:8080/home/getChartCashFlowData")
 function deleteData(id) {
   $("#delete-" + id).submit();
 }
-
-// Dynamic menu
-let path = location.pathname.split("/");
-let url = location.origin + "/" + path[1];
-$("ul.sidebar-menu li a").each(function () {
-  if ($(this).attr("href").indexOf(url) !== -1) {
-    $(this)
-      .parent()
-      .addClass("active")
-      .parent()
-      .parent("li")
-      .addClass("active");
-  }
-});
 
 // Pagination
 $(document).ready(function () {
