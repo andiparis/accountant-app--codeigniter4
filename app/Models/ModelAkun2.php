@@ -54,6 +54,13 @@ class ModelAkun2 extends Model
     return $query->get()->getResult();
   }
 
+  function getTotalAkun2()
+  {
+    $query = $this->db->table('akun2s');
+
+    return $query->countAll();
+  }
+
   function getAkun($accountType)
   {
     $query = [];

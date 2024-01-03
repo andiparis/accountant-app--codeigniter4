@@ -38,6 +38,13 @@ class ModelTransaksi extends Model
   // protected $beforeDelete   = [];
   // protected $afterDelete    = [];
 
+  public function getTotalTransaksi()
+  {
+    $query = $this->db->table('transaksi');
+
+    return $query->countAll();
+  }
+
   public function generateKwitansiNumber()
   {
     $query = $this->db->table('transaksi')->select('RIGHT(transaksi.kwitansi, 4) as kwitansi', FALSE)

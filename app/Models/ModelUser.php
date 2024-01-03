@@ -38,6 +38,13 @@ class ModelUser extends Model
   // protected $beforeDelete   = [];
   // protected $afterDelete    = [];
 
+  public function getTotalUser()
+  {
+    $query = $this->db->table('users');
+
+    return $query->countAll();
+  }
+
   public function getAllUsers()
   {
     $query = $this->db->table('users AS usr')
