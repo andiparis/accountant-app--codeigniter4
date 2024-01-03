@@ -53,6 +53,18 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Arus kas perusahaan tahun <?= date('Y') ?></h4>
+        </div>
+        <div class="card-body">
+          <canvas id="myChart" height="182"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="section-body">
 

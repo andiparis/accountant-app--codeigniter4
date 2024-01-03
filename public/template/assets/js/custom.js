@@ -7,6 +7,72 @@
 
 "use strict";
 
+// Chart
+const statistics_chart = document.getElementById("myChart").getContext("2d");
+
+fetch("http://localhost:8080/home/getChartCashFlowData")
+  .then((response) => response.json())
+  .then((cashFlowData) => {
+    const myChart = new Chart(statistics_chart, {
+      type: "line",
+      data: {
+        labels: [
+          "Januari",
+          "Februari",
+          "Maret",
+          "April",
+          "Mei",
+          "Juni",
+          "Juli",
+          "Agustus",
+          "September",
+          "Oktober",
+          "November",
+          "Desember",
+        ],
+        datasets: [
+          {
+            label: "Arus Kas",
+            data: cashFlowData,
+            borderWidth: 5,
+            borderColor: "#6777ef",
+            backgroundColor: "transparent",
+            pointBackgroundColor: "#fff",
+            pointBorderColor: "#6777ef",
+            pointRadius: 4,
+          },
+        ],
+      },
+      options: {
+        legend: {
+          display: false,
+        },
+        scales: {
+          yAxes: [
+            {
+              gridLines: {
+                display: false,
+                drawBorder: false,
+              },
+              ticks: {
+                stepSize: 150,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                color: "#fbfbfb",
+                lineWidth: 2,
+              },
+            },
+          ],
+        },
+      },
+    });
+  })
+  .catch((error) => console.error("Error fetching cashFlow data:", error));
+
 // Delete data
 function deleteData(id) {
   $("#delete-" + id).submit();

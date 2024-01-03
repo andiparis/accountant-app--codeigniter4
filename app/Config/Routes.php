@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
 $routes->get('/home', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
+$routes->get('/home/getChartCashFlowData', 'Home::getChartCashFlowData');
 
 // Akun 1
 $routes->get('/akun1', 'Akun1::index', ['filter' => 'role:admin']);

@@ -90,6 +90,7 @@
   <script src="<?= base_url() ?>template/assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+  <script src="<?= base_url() ?>template/node_modules/chart.js/dist/Chart.min.js"></script>
 
   <!-- Page Specific JS File -->
 
