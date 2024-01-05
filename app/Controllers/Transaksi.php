@@ -69,7 +69,9 @@ class Transaksi extends ResourceController
    */
   public function new()
   {
-    return view('transaksi/new');
+    return view('transaksi/new', [
+      'loc' => 'transaction-form'
+    ]);
   }
 
   /**
@@ -120,10 +122,13 @@ class Transaksi extends ResourceController
     $status = $this->objStatus->findAll();
 
     if (is_object($transaksi)) {
-      $data['transaksiData'] = $transaksi;
-      $data['akun2Data'] = $akun2;
-      $data['nilaiData'] = $nilai;
-      $data['statusData'] = $status;
+      $data = [
+        'transaksiData' => $transaksi,
+        'akun2Data'     => $akun2,
+        'nilaiData'     => $nilai,
+        'statusData'    => $status,
+        'loc'           => 'transaction-form',
+      ];
 
       return view('transaksi/edit', $data);
     } else {

@@ -53,6 +53,7 @@ class Akun2 extends ResourceController
   {
     $data = [
       'akun1Data'   => $this->objAkun2->getAkun1(),
+      'loc'         => 'account-form'
     ];
 
     return view('akun2/new', $data);
@@ -108,6 +109,7 @@ class Akun2 extends ResourceController
       $data = [
         'akun1'   => $this->objAkun2->getAkun1(),
         'akun'    => $akun,
+        'loc'     => 'account-form'
       ];
 
       return view('akun2/edit', $data);

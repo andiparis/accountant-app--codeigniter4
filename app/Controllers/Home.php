@@ -28,6 +28,7 @@ class Home extends BaseController
       'totalAccount'      => $this->objAkun2->getTotalAkun2(),
       'totalTransaction'  => $this->objTransaksi->getTotalTransaksi(),
       'totalUser'         => $this->objUser->getTotalUser(),
+      'loc'               => 'dashboard-chart'
     ];
 
     return view('home', $data);

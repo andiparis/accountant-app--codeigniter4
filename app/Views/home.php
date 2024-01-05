@@ -1,5 +1,9 @@
 <?= $this->extend('layout/backend') ?>
 
+<?= $this->section('title') ?>
+<title>SIA &mdash; Home</title>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <section class="section">

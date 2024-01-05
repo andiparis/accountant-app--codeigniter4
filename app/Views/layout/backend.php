@@ -92,11 +92,20 @@
   <!-- JS Libraies -->
   <script src="<?= base_url() ?>template/node_modules/chart.js/dist/Chart.min.js"></script>
 
-  <!-- Page Specific JS File -->
-
   <!-- Template JS File -->
   <script src="<?= base_url() ?>template/assets/js/scripts.js"></script>
   <script src="<?= base_url() ?>template/assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <?php if (isset($loc)) {
+    if ($loc == 'dashboard-chart') { ?>
+      <script src="<?= base_url() ?>template/assets/js/page/dashboard-chart.js"></script>
+    <?php } else if ($loc == 'account-form') { ?>
+      <script src="<?= base_url() ?>template/assets/js/page/account-form.js"></script>
+    <?php } else if ($loc == 'transaction-form') { ?>
+      <script src="<?= base_url() ?>template/assets/js/page/transaction-form.js"></script>
+  <?php }
+  }; ?>
 </body>
 
 </html>
