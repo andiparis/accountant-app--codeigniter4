@@ -36,53 +36,71 @@ class Home extends BaseController
   public function getChartCashFlowData()
   {
     $cashFlowTransaction = [];
-    $year = date('Y');
-    for ($month = 1; $month <= 12; $month++) {
-      $startDate = "$year-$month-01";
-      $endDate = "$year-$month-" . date('t', strtotime("$year-$month-01"));
-      $cashFlowTransaction[$month - 1] = $this->objTransaksi->getArusKas($startDate, $endDate);
+    $currentYear = date('Y');
+    $currentMonth = date('m');
+
+    if ($currentMonth <= 6) {
+      $startMonth = 1;
+      $endMonth = 6;
+    } else {
+      $startMonth = 7;
+      $endMonth = 12;
+    }
+
+    for ($month = $startMonth; $month <= $endMonth; $month++) {
+      $startDate = "$currentYear-$month-01";
+      $endDate = "$currentYear-$month-" . date('t', strtotime("$currentYear-$month-01"));
+      if ($startMonth <= 6) {
+        $cashFlowTransaction[$month - 1] = $this->objTransaksi->getArusKas($startDate, $endDate);
+      } else {
+        $cashFlowTransaction[$month - 7] = $this->objTransaksi->getArusKas($startDate, $endDate);
+      }
     }
 
     $cashFlow = [];
     for ($i = 0; $i < count($cashFlowTransaction); $i++) {
 
-      // Arus kas bersih dari aktivitas usaha
-      $totpenerimaan = 0;
-      foreach ($cashFlowTransaction[$i] as $key => $value) {
-        if ($value->id_status == 1) {
-          $penerimaan = $value->debit;
-          $totpenerimaan += $penerimaan;
+      if ($cashFlowTransaction[$i] != null) {
+        // Arus kas bersih dari aktivitas usaha
+        $totpenerimaan = 0;
+        foreach ($cashFlowTransaction[$i] as $key => $value) {
+          if ($value->id_status == 1) {
+            $penerimaan = $value->debit;
+            $totpenerimaan += $penerimaan;
+          }
         }
-      }
 
-      $totpengeluaran = 0;
-      foreach ($cashFlowTransaction[$i] as $key => $value) {
-        if ($value->id_status == 2) {
-          $pengeluaran = $value->kredit;
-          $totpengeluaran += $pengeluaran;
+        $totpengeluaran = 0;
+        foreach ($cashFlowTransaction[$i] as $key => $value) {
+          if ($value->id_status == 2) {
+            $pengeluaran = $value->kredit;
+            $totpengeluaran += $pengeluaran;
+          }
         }
-      }
-      $operationalActivity = $totpenerimaan - $totpengeluaran;
+        $operationalActivity = $totpenerimaan - $totpengeluaran;
 
-      // Arus kas bersih dari aktivitas investasi
-      $modal = 0;
-      foreach ($cashFlowTransaction[$i] as $key => $value) {
-        if ($value->id_status == 3) {
-          $setor = $value->debit;
-          $modal += $setor;
+        // Arus kas bersih dari aktivitas investasi
+        $modal = 0;
+        foreach ($cashFlowTransaction[$i] as $key => $value) {
+          if ($value->id_status == 3) {
+            $setor = $value->debit;
+            $modal += $setor;
+          }
         }
-      }
 
-      $tprive = 0;
-      foreach ($cashFlowTransaction[$i] as $key => $value) {
-        if ($value->id_status == 4) {
-          $prive = $value->kredit;
-          $tprive += $prive;
+        $tprive = 0;
+        foreach ($cashFlowTransaction[$i] as $key => $value) {
+          if ($value->id_status == 4) {
+            $prive = $value->kredit;
+            $tprive += $prive;
+          }
         }
-      }
-      $investmentActivity = $modal - $tprive;
+        $investmentActivity = $modal - $tprive;
 
-      $cashFlow[$i] = $operationalActivity + $investmentActivity;
+        $cashFlow[$i] = $operationalActivity + $investmentActivity;
+      } else {
+        $cashFlow[$i] = 0;
+      }
     }
 
     header('Content-Type: application/json');
