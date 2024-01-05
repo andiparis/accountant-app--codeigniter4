@@ -61,6 +61,7 @@ fetch("http://localhost:8080/home/getChartCashFlowData")
               },
               ticks: {
                 stepSize: 150,
+                maxTicksLimit: 10,
               },
             },
           ],
