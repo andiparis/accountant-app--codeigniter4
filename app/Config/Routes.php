@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
 $routes->get('/home', 'Home::index', ['filter' => 'role:user,admin,manajer,direktur']);
-$routes->get('/home/getChartCashFlowData', 'Home::getChartCashFlowData');
+$routes->get('/home/getChartCashFlowData', 'Home::getChartCashFlowData', ['filter' => 'role:user,admin,manajer,direktur']);
 
 // Akun 1
 $routes->get('/akun1', 'Akun1::index', ['filter' => 'role:admin']);
@@ -29,9 +29,9 @@ $routes->get('/transaksi/status', 'Transaksi::status', ['filter' => 'role:admin'
 $routes->resource('transaksi', ['filter' => 'role:admin']);
 
 // Jurnal Umum
-$routes->get('/jurnalumum', 'JurnalUmum::index', ['filter' => 'role:user,admin']);
-$routes->get('/jurnalumum/index', 'JurnalUmum::index', ['filter' => 'role:user,admin']);
-$routes->post('/jurnalumum', 'JurnalUmum::index', ['filter' => 'role:user,admin']);
+$routes->get('/jurnalumum', 'JurnalUmum::index', ['filter' => 'role:admin']);
+$routes->get('/jurnalumum/index', 'JurnalUmum::index', ['filter' => 'role:admin']);
+$routes->post('/jurnalumum', 'JurnalUmum::index', ['filter' => 'role:admin']);
 $routes->post('/jurnalumum/printjurnalumum', 'JurnalUmum::printjurnalumum', ['filter' => 'role:admin']);
 
 // Posting
