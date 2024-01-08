@@ -11,6 +11,15 @@
     <h1>Arus Kas</h1>
   </div>
 
+  <?php if (session()->getFlashdata('error')) { ?>
+    <div class="alert alert-danger alert-dismissible show fade">
+      <div class="alert-body">
+        <button class="close" data-dismiss="alert"> &times; </button>
+        <?= session()->getFlashdata('error') ?>
+      </div>
+    </div>
+  <?php } ?>
+
   <div class="section-body">
     <div class="card">
       <div class="card-body">
